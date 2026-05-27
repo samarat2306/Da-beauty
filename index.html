@@ -7,1299 +7,858 @@
   <meta name="description" content="DA Nail Studio Beauty Bar — маникюр, педикюр, парикмахерские услуги в районе Мамыр, Алматы. Ежедневно 10:00–20:00." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet" />
+
   <style>
-    /* ─── Reset ──────────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ═══════════════════════════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ─── Design Tokens (Skill: Beauty/Spa, Soft UI Evolution) ───── */
-    :root {
-      /* Colors — warm cream + rose palette */
-      --color-bg:         #FDFAF6;
-      --color-surface:    #FFFFFF;
-      --color-muted-bg:   #F8F1E9;
-      --color-primary:    #C4896C;
-      --color-primary-dk: #A06B52;
-      --color-primary-lt: #F3E3D9;
-      --color-accent:     #8B5E52;
-      --color-fg:         #2C1810;
-      --color-fg-mid:     #7A6355;
-      --color-fg-soft:    #A89080;
-      --color-border:     #EDD9C4;
-      --color-border-lt:  #F5EDE4;
-      --color-dark-bg:    #1E1208;
-      --color-dark-surface: #2A1A0E;
-      --color-dark-border:  rgba(255,255,255,.1);
+:root {
+  --cream:      #FDFAF5;
+  --cream-2:    #F7EFE3;
+  --cream-3:    #EFE2CE;
+  --beige:      #E8D5B7;
+  --rose:       #C4896C;
+  --rose-dk:    #A06B52;
+  --rose-lt:    #F3E3D9;
+  --brown:      #2C1810;
+  --brown-mid:  #7A6355;
+  --brown-soft: #B09080;
+  --white:      #FFFFFF;
+  --gold:       #B8963E;
 
-      /* Typography */
-      --ff-display: 'Playfair Display', Georgia, serif;
-      --ff-body:    'Inter', system-ui, sans-serif;
+  --ff-d: 'Playfair Display', Georgia, serif;
+  --ff-b: 'Inter', system-ui, sans-serif;
 
-      /* Type scale */
-      --text-xs:   .72rem;
-      --text-sm:   .875rem;
-      --text-base: 1rem;
-      --text-lg:   1.125rem;
-      --text-xl:   1.25rem;
-      --text-2xl:  1.5rem;
-      --text-3xl:  1.875rem;
-      --text-4xl:  2.25rem;
-      --text-5xl:  3rem;
-      --text-6xl:  3.75rem;
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-full: 9999px;
 
-      /* Spacing (8dp rhythm) */
-      --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
-      --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
-      --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+  --sh-sm: 0 1px 4px rgba(44,24,16,.07), 0 2px 8px rgba(44,24,16,.05);
+  --sh-md: 0 4px 20px rgba(44,24,16,.09), 0 2px 6px rgba(44,24,16,.04);
+  --sh-lg: 0 12px 48px rgba(44,24,16,.12), 0 4px 12px rgba(44,24,16,.06);
 
-      /* Shadows — Soft UI Evolution */
-      --shadow-sm:  0 1px 3px rgba(44,24,16,.06), 0 1px 2px rgba(44,24,16,.04);
-      --shadow-md:  0 4px 16px rgba(44,24,16,.08), 0 2px 4px rgba(44,24,16,.04);
-      --shadow-lg:  0 10px 40px rgba(44,24,16,.10), 0 4px 8px rgba(44,24,16,.05);
-      --shadow-xl:  0 20px 60px rgba(44,24,16,.12);
+  --nav-h: 66px;
+}
 
-      /* Radius */
-      --radius-sm:  8px;
-      --radius-md:  14px;
-      --radius-lg:  20px;
-      --radius-xl:  28px;
-      --radius-full: 9999px;
+html { scroll-behavior: smooth; font-size: 16px; }
 
-      /* Transitions — 150-300ms per skill */
-      --ease-out:   cubic-bezier(0.0, 0.0, 0.2, 1);
-      --ease-in:    cubic-bezier(0.4, 0.0, 1, 1);
-      --ease:       cubic-bezier(0.4, 0.0, 0.2, 1);
-      --duration-fast:   150ms;
-      --duration-base:   250ms;
-      --duration-slow:   350ms;
-    }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
 
-    /* ─── Base ───────────────────────────────────────────────────── */
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body {
-      font-family: var(--ff-body);
-      background: var(--color-bg);
-      color: var(--color-fg);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
+body {
+  font-family: var(--ff-b);
+  background: var(--cream);
+  color: var(--brown);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
 
-    /* Reduced motion support */
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-      html { scroll-behavior: auto; }
-    }
+a { text-decoration: none; color: inherit; }
+img { display: block; max-width: 100%; }
+button { font-family: inherit; }
 
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-    button { font-family: inherit; }
+:focus-visible { outline: 2px solid var(--rose); outline-offset: 3px; border-radius: var(--r-sm); }
 
-    /* ─── Focus states (Accessibility: CRITICAL) ─────────────────── */
-    :focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 3px;
-      border-radius: var(--radius-sm);
-    }
+/* ═══════════════════════════════════════════════════════════
+   SKIP LINK
+═══════════════════════════════════════════════════════════ */
+.skip {
+  position: absolute; left: -9999px; top: 0; z-index: 9999;
+  padding: 8px 20px; background: var(--rose); color: #fff;
+  font-weight: 600; border-radius: 0 0 var(--r-sm) 0;
+}
+.skip:focus { left: 0; }
 
-    /* ─── Layout ─────────────────────────────────────────────────── */
-    .container { max-width: 1120px; margin: 0 auto; padding: 0 var(--sp-6); }
-    .section    { padding: var(--sp-24) 0; }
-    .section-alt { background: var(--color-muted-bg); }
+/* ═══════════════════════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════════════════════ */
+.wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.section { padding: 96px 0; }
+.bg-cream { background: var(--cream-2); }
 
-    /* ─── Reveal animations (stagger per skill: 30-50ms) ─────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition:
-        opacity var(--duration-slow) var(--ease-out),
-        transform var(--duration-slow) var(--ease-out);
-    }
-    .reveal.in { opacity: 1; transform: none; }
-    .reveal-fast {
-      opacity: 0;
-      transform: translateY(16px);
-      transition:
-        opacity var(--duration-base) var(--ease-out),
-        transform var(--duration-base) var(--ease-out);
-    }
-    .reveal-fast.in { opacity: 1; transform: none; }
+/* ═══════════════════════════════════════════════════════════
+   SECTION HEADER
+═══════════════════════════════════════════════════════════ */
+.sh { text-align: center; margin-bottom: 56px; }
+.sh-eye {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--rose); font-weight: 500; margin-bottom: 12px;
+}
+.sh-eye::before, .sh-eye::after {
+  content: ''; display: block; width: 24px; height: 1px;
+  background: var(--rose); opacity: .45;
+}
+.sh-title {
+  font-family: var(--ff-d);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 400; line-height: 1.1; color: var(--brown);
+}
+.sh-title em { font-style: italic; color: var(--rose); }
+.sh-rule {
+  width: 44px; height: 2px;
+  background: linear-gradient(90deg, var(--rose), var(--beige));
+  border-radius: var(--r-full); margin: 14px auto 0;
+}
 
-    /* ─── Section header ────────────────────────────────────────── */
-    .sec-head { text-align: center; margin-bottom: var(--sp-12); }
-    .sec-eyebrow {
-      display: inline-flex; align-items: center; gap: var(--sp-2);
-      font-size: var(--text-xs);
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--color-primary);
-      margin-bottom: var(--sp-3);
-      font-weight: 500;
-    }
-    .sec-eyebrow::before,
-    .sec-eyebrow::after {
-      content: '';
-      display: block;
-      width: 20px; height: 1px;
-      background: var(--color-primary);
-      opacity: .5;
-    }
-    .sec-title {
-      font-family: var(--ff-display);
-      font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
-      font-weight: 400;
-      line-height: 1.1;
-      color: var(--color-fg);
-    }
-    .sec-title em { font-style: italic; color: var(--color-primary); }
-    .sec-rule {
-      width: 48px; height: 2px;
-      background: linear-gradient(90deg, var(--color-primary), var(--color-border));
-      border-radius: var(--radius-full);
-      margin: var(--sp-4) auto 0;
-    }
+/* ═══════════════════════════════════════════════════════════
+   ORNAMENT DIVIDERS
+═══════════════════════════════════════════════════════════ */
+.ornament {
+  display: flex; align-items: center; justify-content: center;
+  gap: 16px; padding: 0 24px;
+  overflow: hidden;
+}
+.ornament-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--beige), transparent); }
+.ornament-svg { flex-shrink: 0; color: var(--rose); opacity: .55; }
 
-    /* ────────────────────────────────────────────────────────────── */
-    /*  NAV                                                          */
-    /* ────────────────────────────────────────────────────────────── */
-    #nav {
-      position: fixed; inset: 0 0 auto 0; z-index: 500;
-      background: rgba(253,250,246,.88);
-      backdrop-filter: blur(16px) saturate(1.4);
-      -webkit-backdrop-filter: blur(16px) saturate(1.4);
-      border-bottom: 1px solid transparent;
-      transition:
-        border-color var(--duration-base) var(--ease),
-        box-shadow var(--duration-base) var(--ease);
-    }
-    #nav.scrolled {
-      border-color: var(--color-border-lt);
-      box-shadow: var(--shadow-sm);
-    }
-    .nav-wrap {
-      display: flex; align-items: center; justify-content: space-between;
-      height: 68px;
-    }
-    .nav-logo {
-      display: flex; align-items: center; gap: var(--sp-2);
-      font-family: var(--ff-display);
-      font-size: var(--text-lg);
-      font-weight: 600;
-      color: var(--color-fg);
-      letter-spacing: .02em;
-      cursor: pointer;
-    }
-    .nav-logo-icon {
-      width: 32px; height: 32px;
-      background: var(--color-primary);
-      border-radius: var(--radius-sm);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .nav-logo-icon svg { width: 18px; height: 18px; }
-    .nav-logo span { color: var(--color-primary); }
+/* ═══════════════════════════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity .6s cubic-bezier(0,.0,.2,1), transform .6s cubic-bezier(0,.0,.2,1);
+}
+.reveal.visible { opacity: 1; transform: none; }
+.reveal-up {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .45s cubic-bezier(0,.0,.2,1), transform .45s cubic-bezier(0,.0,.2,1);
+}
+.reveal-up.visible { opacity: 1; transform: none; }
 
-    .nav-links {
-      display: flex; align-items: center; gap: var(--sp-8);
-    }
-    .nav-links a {
-      font-size: var(--text-sm);
-      font-weight: 500;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      color: var(--color-fg-mid);
-      transition: color var(--duration-fast) var(--ease);
-      cursor: pointer;
-    }
-    .nav-links a:hover { color: var(--color-primary); }
+/* ═══════════════════════════════════════════════════════════
+   BUTTONS  — flex layout, no overflow, full-width on mobile
+═══════════════════════════════════════════════════════════ */
+.btn-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+.btn-row--center { justify-content: center; }
 
-    .nav-cta {
-      display: inline-flex; align-items: center; gap: var(--sp-2);
-      padding: 10px var(--sp-5);
-      border-radius: var(--radius-full);
-      background: var(--color-primary);
-      color: #fff;
-      font-size: var(--text-sm); font-weight: 600;
-      letter-spacing: .02em;
-      cursor: pointer;
-      border: none;
-      transition:
-        background var(--duration-fast) var(--ease),
-        transform var(--duration-fast) var(--ease),
-        box-shadow var(--duration-fast) var(--ease);
-      min-height: 44px; /* touch target */
-    }
-    .nav-cta:hover {
-      background: var(--color-primary-dk);
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(196,137,108,.35);
-    }
-    .nav-cta svg { width: 16px; height: 16px; }
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  min-height: 48px; padding: 0 28px;
+  border-radius: var(--r-full);
+  font-family: var(--ff-b); font-size: .875rem; font-weight: 600; letter-spacing: .03em;
+  border: none; cursor: pointer; white-space: nowrap;
+  transition: background .18s ease, color .18s ease, transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+.btn:active { transform: scale(.97) !important; }
 
-    /* Hamburger */
-    .nav-burger {
-      display: none;
-      flex-direction: column; justify-content: center; gap: 5px;
-      width: 44px; height: 44px;
-      background: none; border: none;
-      cursor: pointer; padding: var(--sp-2);
-    }
-    .nav-burger-line {
-      display: block; width: 22px; height: 1.5px;
-      background: var(--color-fg); border-radius: var(--radius-full);
-      transform-origin: center;
-      transition: transform var(--duration-base) var(--ease), opacity var(--duration-base) var(--ease);
-    }
-    .nav-burger[aria-expanded="true"] .nav-burger-line:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
-    .nav-burger[aria-expanded="true"] .nav-burger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
-    .nav-burger[aria-expanded="true"] .nav-burger-line:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+.btn-primary { background: var(--rose); color: #fff; }
+.btn-primary:hover { background: var(--rose-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,137,108,.38); }
 
-    /* Mobile menu */
-    #nav-mobile {
-      display: none; flex-direction: column;
-      background: var(--color-surface);
-      border-top: 1px solid var(--color-border-lt);
-      padding: var(--sp-5) var(--sp-6) var(--sp-6);
-      gap: var(--sp-1);
-    }
-    #nav-mobile.open { display: flex; }
-    .nav-mobile-link {
-      display: block;
-      padding: var(--sp-3) var(--sp-4);
-      border-radius: var(--radius-sm);
-      font-size: var(--text-base); font-weight: 500;
-      color: var(--color-fg-mid);
-      cursor: pointer;
-      transition: background var(--duration-fast) var(--ease), color var(--duration-fast) var(--ease);
-      min-height: 44px; display: flex; align-items: center;
-    }
-    .nav-mobile-link:hover { background: var(--color-muted-bg); color: var(--color-primary); }
-    .nav-mobile-cta {
-      margin-top: var(--sp-3);
-      display: flex; justify-content: center;
-    }
+.btn-outline { background: transparent; color: var(--brown); border: 1.5px solid var(--beige); }
+.btn-outline:hover { border-color: var(--rose); color: var(--rose); transform: translateY(-2px); }
 
-    /* ────────────────────────────────────────────────────────────── */
-    /*  HERO                                                         */
-    /* ────────────────────────────────────────────────────────────── */
-    #hero {
-      min-height: 100svh;
-      display: flex; align-items: center;
-      position: relative; overflow: hidden;
-      padding-top: 68px; /* nav offset */
-    }
+.btn-outline-light { background: transparent; color: rgba(253,250,246,.9); border: 1.5px solid rgba(255,255,255,.3); }
+.btn-outline-light:hover { border-color: rgba(255,255,255,.7); color: #fff; transform: translateY(-2px); }
 
-    /* Gradient background */
-    .hero-bg {
-      position: absolute; inset: 0; z-index: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 70% 30%, rgba(196,137,108,.12) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 10% 80%, rgba(237,217,196,.25) 0%, transparent 55%),
-        var(--color-bg);
-    }
+.btn-wa { background: #22C55E; color: #fff; }
+.btn-wa:hover { background: #16A34A; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(34,197,94,.35); }
 
-    /* Decorative floral ring — top right */
-    .hero-deco {
-      position: absolute; z-index: 0; pointer-events: none;
-    }
-    .hero-deco-tr {
-      top: 80px; right: -60px;
-      width: clamp(260px, 30vw, 420px);
-      opacity: .18;
-    }
-    .hero-deco-bl {
-      bottom: -40px; left: -40px;
-      width: clamp(180px, 20vw, 300px);
-      opacity: .12;
-      transform: rotate(180deg);
-    }
+.btn-map { background: var(--rose); color: #fff; }
+.btn-map:hover { background: var(--rose-dk); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(196,137,108,.38); }
 
-    .hero-content {
-      position: relative; z-index: 1;
-      width: 100%;
-    }
-    .hero-inner {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--sp-16);
-      align-items: center;
-    }
+@media (max-width: 480px) {
+  .btn { min-height: 52px; width: 100%; }
+  .btn-row { flex-direction: column; }
+}
 
-    /* Left copy */
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: var(--sp-2);
-      padding: 6px var(--sp-4);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-full);
-      font-size: var(--text-xs); font-weight: 500;
-      letter-spacing: .14em; text-transform: uppercase;
-      color: var(--color-primary);
-      background: var(--color-primary-lt);
-      margin-bottom: var(--sp-5);
-      animation: heroFade .7s .1s both;
-    }
-    .hero-eyebrow svg { width: 12px; height: 12px; }
+/* ═══════════════════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════════════════ */
+#nav {
+  position: fixed; inset: 0 0 auto 0; z-index: 600;
+  height: var(--nav-h);
+  background: rgba(253,250,245,.92);
+  backdrop-filter: blur(18px) saturate(1.5);
+  -webkit-backdrop-filter: blur(18px) saturate(1.5);
+  border-bottom: 1px solid transparent;
+  transition: border-color .25s, box-shadow .25s;
+}
+#nav.on { border-color: var(--beige); box-shadow: var(--sh-sm); }
 
-    .hero-title {
-      font-family: var(--ff-display);
-      font-size: clamp(var(--text-4xl), 6vw, var(--text-6xl));
-      font-weight: 400;
-      line-height: 1.05;
-      color: var(--color-fg);
-      margin-bottom: var(--sp-5);
-      animation: heroFade .7s .2s both;
-    }
-    .hero-title em {
-      font-style: italic;
-      color: var(--color-primary);
-    }
-    .hero-title strong {
-      font-weight: 600;
-      display: block;
-    }
+.nav-in {
+  display: flex; align-items: center; justify-content: space-between;
+  height: var(--nav-h);
+}
+.nav-logo {
+  font-family: var(--ff-d); font-size: 1.2rem; font-weight: 600;
+  color: var(--brown); letter-spacing: .02em; display: flex; align-items: center; gap: 8px;
+}
+.nav-logo-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--rose); flex-shrink: 0;
+}
+.nav-logo span { color: var(--rose); }
 
-    .hero-desc {
-      font-size: var(--text-lg);
-      color: var(--color-fg-mid);
-      max-width: 440px;
-      line-height: 1.7;
-      margin-bottom: var(--sp-8);
-      animation: heroFade .7s .3s both;
-    }
+.nav-links { display: flex; align-items: center; gap: 36px; }
+.nav-links a {
+  font-size: .8rem; font-weight: 500; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--brown-mid); transition: color .15s;
+}
+.nav-links a:hover { color: var(--rose); }
 
-    .hero-actions {
-      display: flex; gap: var(--sp-3); flex-wrap: wrap;
-      margin-bottom: var(--sp-10);
-      animation: heroFade .7s .4s both;
-    }
+.nav-action {
+  display: flex; align-items: center; gap: 12px;
+}
 
-    .hero-stats {
-      display: flex; gap: var(--sp-8); flex-wrap: wrap;
-      animation: heroFade .7s .5s both;
-    }
-    .hero-stat { display: flex; flex-direction: column; gap: 2px; }
-    .hero-stat-num {
-      font-family: var(--ff-display);
-      font-size: var(--text-2xl);
-      font-weight: 600;
-      color: var(--color-fg);
-      line-height: 1;
-    }
-    .hero-stat-label {
-      font-size: var(--text-xs);
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      color: var(--color-fg-soft);
-    }
+/* burger */
+.burger {
+  display: none; flex-direction: column; justify-content: center; gap: 5px;
+  width: 44px; height: 44px; background: none; border: none; cursor: pointer; padding: 8px;
+}
+.burger-l {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--brown); border-radius: var(--r-full);
+  transition: transform .25s, opacity .25s;
+}
+.burger[aria-expanded="true"] .burger-l:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.burger[aria-expanded="true"] .burger-l:nth-child(2) { opacity: 0; }
+.burger[aria-expanded="true"] .burger-l:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    /* Right visual */
-    .hero-visual {
-      position: relative;
-      animation: heroFade .9s .2s both;
-    }
-    .hero-card-main {
-      background: var(--color-surface);
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--color-border-lt);
-      padding: var(--sp-8);
-      box-shadow: var(--shadow-lg);
-      aspect-ratio: 4/5;
-      display: flex; flex-direction: column;
-      justify-content: flex-end;
-      overflow: hidden;
-      position: relative;
-    }
-    .hero-card-bg {
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse at 30% 20%, rgba(196,137,108,.18) 0%, transparent 50%),
-        radial-gradient(ellipse at 80% 70%, rgba(237,217,196,.3) 0%, transparent 50%),
-        linear-gradient(160deg, #fdf5ef 0%, #f8ede2 100%);
-    }
-    .hero-card-floral {
-      position: absolute; top: 0; right: 0;
-      width: 70%; opacity: .35;
-    }
-    .hero-card-center {
-      position: absolute;
-      inset: 0; display: flex; align-items: center; justify-content: center;
-    }
-    .hero-card-info {
-      position: relative; z-index: 2;
-      background: rgba(255,255,255,.85);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,.8);
-      border-radius: var(--radius-lg);
-      padding: var(--sp-5) var(--sp-6);
-    }
-    .hero-card-info-name {
-      font-family: var(--ff-display);
-      font-size: var(--text-xl);
-      font-weight: 600;
-      color: var(--color-fg);
-      margin-bottom: var(--sp-1);
-    }
-    .hero-card-info-sub {
-      font-size: var(--text-sm); color: var(--color-fg-mid);
-    }
-    .hero-card-info-chips {
-      display: flex; gap: var(--sp-2); margin-top: var(--sp-3); flex-wrap: wrap;
-    }
-    .chip {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 5px 12px;
-      border-radius: var(--radius-full);
-      background: var(--color-primary-lt);
-      color: var(--color-accent);
-      font-size: var(--text-xs); font-weight: 500;
-    }
-    .chip svg { width: 12px; height: 12px; flex-shrink: 0; }
+/* mobile menu */
+#mob {
+  display: none; flex-direction: column; gap: 2px;
+  background: var(--white); border-top: 1px solid var(--cream-3);
+  padding: 16px 24px 24px;
+}
+#mob.open { display: flex; }
+.mob-a {
+  display: flex; align-items: center; min-height: 44px; padding: 0 12px;
+  border-radius: var(--r-sm); font-size: .95rem; font-weight: 500;
+  color: var(--brown-mid); transition: background .15s, color .15s;
+}
+.mob-a:hover { background: var(--cream-2); color: var(--rose); }
+.mob-btns { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
 
-    /* Floating badge cards */
-    .hero-badge {
-      position: absolute;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border-lt);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-md);
-      padding: var(--sp-3) var(--sp-4);
-      display: flex; align-items: center; gap: var(--sp-3);
-    }
-    .hero-badge-icon {
-      width: 36px; height: 36px; border-radius: var(--radius-sm);
-      background: var(--color-primary-lt);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .hero-badge-icon svg { width: 18px; height: 18px; color: var(--color-primary); }
-    .hero-badge-text { font-size: var(--text-xs); color: var(--color-fg-soft); }
-    .hero-badge-text strong { display: block; font-size: var(--text-sm); color: var(--color-fg); font-weight: 600; }
-    .hero-badge-1 { bottom: 32px; left: -48px; }
-    .hero-badge-2 { top: 48px; left: -40px; }
+@media (max-width: 840px) {
+  .nav-links, .nav-action { display: none; }
+  .burger { display: flex; }
+}
 
-    @keyframes heroFade {
-      from { opacity: 0; transform: translateY(-20px); }
-      to   { opacity: 1; transform: none; }
-    }
+/* ═══════════════════════════════════════════════════════════
+   HERO  — dark overlay with floral background
+═══════════════════════════════════════════════════════════ */
+#hero {
+  min-height: 100svh;
+  padding-top: var(--nav-h);
+  position: relative; overflow: hidden;
+  display: flex; align-items: center;
 
-    /* ─── Buttons ─────────────────────────────────────────────────── */
-    .btn {
-      display: inline-flex; align-items: center; gap: var(--sp-2);
-      min-height: 48px; /* touch target ≥44px */
-      padding: 0 var(--sp-6);
-      border-radius: var(--radius-full);
-      font-family: var(--ff-body);
-      font-size: var(--text-sm); font-weight: 600;
-      letter-spacing: .02em;
-      border: none; cursor: pointer;
-      transition:
-        background var(--duration-fast) var(--ease),
-        color var(--duration-fast) var(--ease),
-        transform var(--duration-fast) var(--ease),
-        box-shadow var(--duration-fast) var(--ease),
-        border-color var(--duration-fast) var(--ease);
-      white-space: nowrap;
-    }
-    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
-    .btn:active { transform: scale(.97); }
+  /* warm dark brown base + floral SVG pattern */
+  background-color: #1C0F07;
+}
 
-    .btn-primary {
-      background: var(--color-primary); color: #fff;
-    }
-    .btn-primary:hover {
-      background: var(--color-primary-dk);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(196,137,108,.38);
-    }
+/* layered gradient overlay — warm brownish dark with floral hint */
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 90% 70% at 55% 40%, rgba(180,110,70,.28) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 60% at 10% 90%, rgba(237,210,175,.12) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 90% 10%, rgba(196,137,108,.14) 0%, transparent 45%),
+    linear-gradient(150deg, #24110A 0%, #1C0D06 50%, #120804 100%);
+}
 
-    .btn-outline {
-      background: transparent; color: var(--color-fg);
-      border: 1.5px solid var(--color-border);
-    }
-    .btn-outline:hover {
-      border-color: var(--color-primary);
-      color: var(--color-primary);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-    }
+/* floral pattern overlay (SVG as data-uri background) */
+.hero-pattern {
+  position: absolute; inset: 0; z-index: 1; opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cg fill='none' stroke='%23C4896C' stroke-width='1'%3E%3Ccircle cx='100' cy='100' r='45'/%3E%3Cpath d='M100 55 C88 70 88 85 100 100 C112 85 112 70 100 55Z'/%3E%3Cpath d='M100 145 C88 130 88 115 100 100 C112 115 112 130 100 145Z'/%3E%3Cpath d='M55 100 C70 88 85 88 100 100 C85 112 70 112 55 100Z'/%3E%3Cpath d='M145 100 C130 88 115 88 100 100 C115 112 130 112 145 100Z'/%3E%3Ccircle cx='100' cy='100' r='10'/%3E%3Ccircle cx='100' cy='55' r='4'/%3E%3Ccircle cx='100' cy='145' r='4'/%3E%3Ccircle cx='55' cy='100' r='4'/%3E%3Ccircle cx='145' cy='100' r='4'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
 
-    .btn-wa {
-      background: #22C55E; color: #fff;
-    }
-    .btn-wa:hover {
-      background: #16A34A;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(34,197,94,.35);
-    }
+/* large decorative floral SVG — right side */
+.hero-deco-r {
+  position: absolute; right: -60px; top: 50%; z-index: 2;
+  transform: translateY(-50%);
+  width: clamp(280px, 35vw, 500px);
+  opacity: .13; pointer-events: none;
+}
+.hero-deco-l {
+  position: absolute; left: -80px; bottom: -60px; z-index: 2;
+  width: clamp(200px, 25vw, 360px);
+  opacity: .09; pointer-events: none;
+  transform: rotate(30deg);
+}
 
-    .btn-2gis {
-      background: var(--color-primary); color: #fff;
-    }
-    .btn-2gis:hover {
-      background: var(--color-primary-dk);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(196,137,108,.38);
-    }
+.hero-content {
+  position: relative; z-index: 3;
+  max-width: 680px;
+}
 
-    .btn-ghost-light {
-      background: rgba(255,255,255,.1); color: rgba(253,250,246,.85);
-      border: 1.5px solid rgba(255,255,255,.18);
-    }
-    .btn-ghost-light:hover {
-      background: rgba(255,255,255,.18);
-      color: #fff;
-      transform: translateY(-2px);
-    }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 18px; border-radius: var(--r-full);
+  border: 1px solid rgba(196,137,108,.5);
+  background: rgba(196,137,108,.12);
+  font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
+  color: rgba(237,210,175,.85); font-weight: 500;
+  margin-bottom: 24px;
+}
+.hero-badge-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--rose); }
 
-    /* ────────────────────────────────────────────────────────────── */
-    /*  SERVICES                                                     */
-    /* ────────────────────────────────────────────────────────────── */
-    .tabs-wrap {
-      display: flex; gap: var(--sp-2); justify-content: center; flex-wrap: wrap;
-      margin-bottom: var(--sp-10);
-    }
-    .tab-btn {
-      display: inline-flex; align-items: center; gap: var(--sp-2);
-      min-height: 44px; padding: 0 var(--sp-5);
-      border-radius: var(--radius-full);
-      background: transparent; color: var(--color-fg-mid);
-      border: 1.5px solid var(--color-border);
-      font-family: var(--ff-body);
-      font-size: var(--text-sm); font-weight: 500;
-      letter-spacing: .04em; text-transform: uppercase;
-      cursor: pointer;
-      transition:
-        background var(--duration-fast) var(--ease),
-        color var(--duration-fast) var(--ease),
-        border-color var(--duration-fast) var(--ease),
-        box-shadow var(--duration-fast) var(--ease);
-    }
-    .tab-btn svg { width: 16px; height: 16px; }
-    .tab-btn:hover { border-color: var(--color-primary); color: var(--color-primary); }
-    .tab-btn.active {
-      background: var(--color-primary); border-color: var(--color-primary);
-      color: #fff;
-      box-shadow: 0 4px 16px rgba(196,137,108,.32);
-    }
+.hero-title {
+  font-family: var(--ff-d);
+  font-size: clamp(3rem, 9vw, 6rem);
+  font-weight: 700;
+  line-height: .95;
+  color: #FDFAF5;
+  letter-spacing: -.01em;
+  margin-bottom: 16px;
+}
+.hero-title-sub {
+  font-family: var(--ff-d);
+  font-size: clamp(1.5rem, 4vw, 2.8rem);
+  font-weight: 400;
+  font-style: italic;
+  color: var(--rose);
+  line-height: 1.2;
+  margin-bottom: 28px;
+  display: block;
+}
 
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
+.hero-desc {
+  font-size: 1.05rem;
+  color: rgba(253,250,245,.6);
+  max-width: 480px;
+  line-height: 1.75;
+  margin-bottom: 40px;
+}
 
-    .price-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: var(--sp-3);
-    }
-    .price-card {
-      display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border-lt);
-      border-radius: var(--radius-md);
-      padding: var(--sp-4) var(--sp-5);
-      cursor: default;
-      transition:
-        border-color var(--duration-fast) var(--ease),
-        box-shadow var(--duration-fast) var(--ease),
-        transform var(--duration-fast) var(--ease);
-    }
-    .price-card:hover {
-      border-color: var(--color-border);
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
-    }
-    .price-card-left { flex: 1; min-width: 0; }
-    .price-card-name {
-      font-size: var(--text-base); font-weight: 500;
-      color: var(--color-fg);
-      line-height: 1.4;
-    }
-    .price-card-note {
-      font-size: var(--text-xs); color: var(--color-fg-soft);
-      margin-top: 2px; font-style: italic;
-    }
-    .price-card-price {
-      font-family: var(--ff-display);
-      font-size: var(--text-xl); font-weight: 500;
-      color: var(--color-primary);
-      white-space: nowrap; flex-shrink: 0;
-      /* tabular figures for data columns per skill */
-      font-variant-numeric: tabular-nums;
-    }
+/* hero info chips */
+.hero-chips {
+  display: flex; flex-wrap: wrap; gap: 10px;
+  margin-top: 40px;
+}
+.hero-chip {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: var(--r-full);
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  font-size: .8rem; color: rgba(253,250,245,.7);
+}
+.hero-chip svg { width: 14px; height: 14px; color: var(--rose); flex-shrink: 0; }
 
-    /* ────────────────────────────────────────────────────────────── */
-    /*  ABOUT                                                        */
-    /* ────────────────────────────────────────────────────────────── */
-    .about-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: var(--sp-16); align-items: center;
-    }
+/* ═══════════════════════════════════════════════════════════
+   SERVICES / PRICE LIST
+═══════════════════════════════════════════════════════════ */
+.tabs-row {
+  display: flex; flex-wrap: wrap; gap: 8px; justify-content: center;
+  margin-bottom: 40px;
+}
+.tab-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  min-height: 44px; padding: 0 24px;
+  border-radius: var(--r-full);
+  background: transparent; color: var(--brown-mid);
+  border: 1.5px solid var(--beige);
+  font-family: var(--ff-b); font-size: .8rem; font-weight: 500;
+  letter-spacing: .06em; text-transform: uppercase;
+  cursor: pointer;
+  transition: background .15s, color .15s, border-color .15s, box-shadow .15s;
+}
+.tab-btn svg { width: 15px; height: 15px; }
+.tab-btn:hover { border-color: var(--rose); color: var(--rose); }
+.tab-btn.on {
+  background: var(--rose); border-color: var(--rose); color: #fff;
+  box-shadow: 0 4px 16px rgba(196,137,108,.3);
+}
 
-    /* Visual side */
-    .about-visual { position: relative; }
-    .about-vis-main {
-      aspect-ratio: 3/4;
-      background: linear-gradient(145deg, #f8ede2 0%, #efd5bf 100%);
-      border-radius: var(--radius-xl);
-      overflow: hidden; position: relative;
-      box-shadow: var(--shadow-xl);
-    }
-    .about-vis-deco { position: absolute; inset: 0; opacity: .2; }
-    .about-vis-center {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .about-vis-icon {
-      width: 120px; height: 120px;
-      background: rgba(255,255,255,.5);
-      backdrop-filter: blur(8px);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 8px 32px rgba(196,137,108,.2);
-    }
-    .about-vis-icon svg { width: 56px; height: 56px; color: var(--color-primary); }
+.tab-panel { display: none; }
+.tab-panel.on { display: block; }
 
-    /* Floating stat cards */
-    .about-float {
-      position: absolute;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border-lt);
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-md);
-      padding: var(--sp-4) var(--sp-5);
-    }
-    .about-float-1 {
-      bottom: -20px; right: -32px;
-      text-align: center; min-width: 130px;
-    }
-    .about-float-2 {
-      top: 32px; left: -32px;
-    }
-    .float-num {
-      font-family: var(--ff-display);
-      font-size: var(--text-3xl); font-weight: 600;
-      color: var(--color-primary); line-height: 1;
-    }
-    .float-label {
-      font-size: var(--text-xs); letter-spacing: .1em;
-      text-transform: uppercase; color: var(--color-fg-soft);
-      margin-top: var(--sp-1);
-    }
-    .float-row {
-      display: flex; align-items: center; gap: var(--sp-3);
-    }
-    .float-icon {
-      width: 36px; height: 36px; border-radius: var(--radius-sm);
-      background: var(--color-primary-lt);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .float-icon svg { width: 18px; height: 18px; color: var(--color-primary); }
-    .float-text strong { display: block; font-size: var(--text-sm); color: var(--color-fg); }
-    .float-text span { font-size: var(--text-xs); color: var(--color-fg-soft); }
+/* price grid */
+.price-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 10px;
+}
 
-    /* Text side */
-    .about-text { }
-    .about-text h2 {
-      font-family: var(--ff-display);
-      font-size: clamp(var(--text-3xl), 4vw, var(--text-5xl));
-      font-weight: 400; line-height: 1.1;
-      color: var(--color-fg); margin-bottom: var(--sp-5);
-    }
-    .about-text h2 em { font-style: italic; color: var(--color-primary); }
-    .about-text p { color: var(--color-fg-mid); margin-bottom: var(--sp-4); font-size: var(--text-lg); line-height: 1.7; }
+.price-card {
+  display: flex; align-items: center; gap: 14px;
+  background: var(--white);
+  border: 1px solid var(--cream-3);
+  border-radius: var(--r-md);
+  padding: 16px 20px;
+  cursor: default;
+  transition: border-color .2s, box-shadow .2s, transform .2s;
+  min-height: 68px;
+}
+.price-card:hover {
+  border-color: rgba(196,137,108,.35);
+  box-shadow: var(--sh-md);
+  transform: translateY(-2px);
+}
 
-    .about-perks {
-      display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4);
-      margin-top: var(--sp-6);
-    }
-    .perk {
-      display: flex; align-items: flex-start; gap: var(--sp-3);
-      padding: var(--sp-4);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border-lt);
-      border-radius: var(--radius-md);
-      transition: box-shadow var(--duration-fast) var(--ease), transform var(--duration-fast) var(--ease);
-    }
-    .perk:hover { box-shadow: var(--shadow-sm); transform: translateY(-1px); }
-    .perk-icon {
-      width: 40px; height: 40px; border-radius: var(--radius-sm);
-      background: var(--color-primary-lt);
-      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-    }
-    .perk-icon svg { width: 20px; height: 20px; color: var(--color-primary); }
-    .perk-title { font-weight: 600; font-size: var(--text-sm); color: var(--color-fg); margin-bottom: 2px; }
-    .perk-desc  { font-size: var(--text-xs); color: var(--color-fg-mid); line-height: 1.5; }
+/* number badge */
+.price-num {
+  width: 32px; height: 32px; border-radius: var(--r-sm);
+  background: var(--rose-lt);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  font-family: var(--ff-d); font-size: .9rem; font-weight: 600;
+  color: var(--rose);
+  font-variant-numeric: tabular-nums;
+}
 
-    /* ────────────────────────────────────────────────────────────── */
-    /*  CONTACTS                                                     */
-    /* ────────────────────────────────────────────────────────────── */
-    #contacts {
-      background: var(--color-dark-bg);
-      color: rgba(253,250,246,.9);
-      padding: var(--sp-24) 0;
-    }
-    #contacts .sec-title { color: rgba(253,250,246,.95); }
-    #contacts .sec-eyebrow { color: var(--color-border); }
-    #contacts .sec-eyebrow::before,
-    #contacts .sec-eyebrow::after { background: var(--color-border); }
-    #contacts .sec-rule { background: linear-gradient(90deg, var(--color-primary), rgba(196,137,108,.2)); }
+.price-body { flex: 1; min-width: 0; }
+.price-name { font-size: .95rem; font-weight: 500; color: var(--brown); line-height: 1.35; }
+.price-note { font-size: .72rem; color: var(--brown-soft); margin-top: 2px; font-style: italic; }
 
-    .contacts-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: var(--sp-4);
-      margin-bottom: var(--sp-12);
-    }
-    .contact-card {
-      background: var(--color-dark-surface);
-      border: 1px solid var(--color-dark-border);
-      border-radius: var(--radius-lg);
-      padding: var(--sp-6);
-      transition:
-        background var(--duration-fast) var(--ease),
-        border-color var(--duration-fast) var(--ease);
-    }
-    .contact-card:hover {
-      background: rgba(255,255,255,.06);
-      border-color: rgba(196,137,108,.3);
-    }
-    .contact-card-icon {
-      width: 44px; height: 44px;
-      border-radius: var(--radius-sm);
-      background: rgba(196,137,108,.18);
-      display: flex; align-items: center; justify-content: center;
-      margin-bottom: var(--sp-4);
-    }
-    .contact-card-icon svg { width: 22px; height: 22px; color: var(--color-primary); }
-    .contact-card-label {
-      font-size: var(--text-xs); letter-spacing: .14em;
-      text-transform: uppercase; color: rgba(253,250,246,.4);
-      margin-bottom: var(--sp-2);
-    }
-    .contact-card-value {
-      font-size: var(--text-base); color: rgba(253,250,246,.88);
-      line-height: 1.6; font-weight: 400;
-    }
+/* price value — right-aligned */
+.price-val {
+  font-family: var(--ff-d);
+  font-size: 1.1rem; font-weight: 500;
+  color: var(--rose); white-space: nowrap;
+  text-align: right; flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+  margin-left: auto;
+}
 
-    .contacts-actions {
-      display: flex; gap: var(--sp-3); justify-content: center; flex-wrap: wrap;
-    }
+/* ═══════════════════════════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════════════════════════ */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: center;
+}
 
-    /* ────────────────────────────────────────────────────────────── */
-    /*  FOOTER                                                       */
-    /* ────────────────────────────────────────────────────────────── */
-    footer {
-      background: #110B04;
-      padding: var(--sp-6) var(--sp-6);
-      text-align: center;
-      font-size: var(--text-sm);
-      color: rgba(253,250,246,.3);
-      letter-spacing: .04em;
-    }
+/* visual panel */
+.about-vis { position: relative; }
+.about-vis-card {
+  aspect-ratio: 3/4;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: linear-gradient(145deg, #f5e8d4 0%, #ead6ba 60%, #dfc6a0 100%);
+  box-shadow: var(--sh-lg);
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.about-vis-bg {
+  position: absolute; inset: 0; opacity: .18;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cg fill='none' stroke='%23C4896C' stroke-width='1'%3E%3Ccircle cx='80' cy='80' r='36'/%3E%3Cpath d='M80 44 C71 57 71 68 80 80 C89 68 89 57 80 44Z'/%3E%3Cpath d='M80 116 C71 103 71 92 80 80 C89 92 89 103 80 116Z'/%3E%3Cpath d='M44 80 C57 71 68 71 80 80 C68 89 57 89 44 80Z'/%3E%3Cpath d='M116 80 C103 71 92 71 80 80 C92 89 103 89 116 80Z'/%3E%3Ccircle cx='80' cy='80' r='8'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
+.about-vis-icon {
+  width: 100px; height: 100px; border-radius: 50%;
+  background: rgba(255,255,255,.55);
+  backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 8px 32px rgba(196,137,108,.2);
+  position: relative; z-index: 1;
+}
+.about-vis-icon svg { width: 48px; height: 48px; color: var(--rose); }
 
-    /* ────────────────────────────────────────────────────────────── */
-    /*  FAB WhatsApp                                                 */
-    /* ────────────────────────────────────────────────────────────── */
-    .fab {
-      position: fixed; bottom: 28px; right: 28px; z-index: 400;
-      width: 56px; height: 56px;
-      border-radius: 50%;
-      background: #22C55E; color: #fff;
-      display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 6px 24px rgba(34,197,94,.45);
-      cursor: pointer; border: none;
-      transition:
-        transform var(--duration-base) var(--ease),
-        box-shadow var(--duration-base) var(--ease);
-    }
-    .fab:hover {
-      transform: scale(1.1) translateY(-2px);
-      box-shadow: 0 12px 36px rgba(34,197,94,.55);
-    }
-    .fab svg { width: 28px; height: 28px; }
+/* float cards */
+.af {
+  position: absolute;
+  background: var(--white); border: 1px solid var(--cream-3);
+  border-radius: var(--r-md); box-shadow: var(--sh-md);
+  padding: 14px 18px;
+}
+.af-1 { bottom: -16px; right: -28px; text-align: center; min-width: 120px; }
+.af-1 .af-num { font-family: var(--ff-d); font-size: 2.2rem; font-weight: 600; color: var(--rose); line-height: 1; }
+.af-1 .af-lbl { font-size: .7rem; letter-spacing: .1em; text-transform: uppercase; color: var(--brown-soft); margin-top: 4px; }
+.af-2 { top: 28px; left: -28px; display: flex; align-items: center; gap: 10px; }
+.af-ico { width: 34px; height: 34px; border-radius: var(--r-sm); background: var(--rose-lt); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.af-ico svg { width: 16px; height: 16px; color: var(--rose); }
+.af-t strong { display: block; font-size: .875rem; color: var(--brown); font-weight: 600; }
+.af-t span { font-size: .72rem; color: var(--brown-soft); }
 
-    /* ────────────────────────────────────────────────────────────── */
-    /*  RESPONSIVE  (mobile-first, per skill breakpoints)           */
-    /* ────────────────────────────────────────────────────────────── */
-    @media (max-width: 1024px) {
-      .hero-inner { grid-template-columns: 1fr; gap: var(--sp-10); }
-      .hero-visual { display: none; } /* hide visual card on tablet/mobile, focus copy */
-      .hero-title { font-size: clamp(var(--text-4xl), 9vw, var(--text-5xl)); }
-      .hero-desc { max-width: 100%; }
-      .about-grid { grid-template-columns: 1fr; gap: var(--sp-10); }
-      .about-float-1 { right: -12px; }
-      .about-float-2 { left: -12px; }
-    }
+/* text side */
+.about-txt h2 {
+  font-family: var(--ff-d);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 400; line-height: 1.1; color: var(--brown); margin-bottom: 18px;
+}
+.about-txt h2 em { font-style: italic; color: var(--rose); }
+.about-txt p { color: var(--brown-mid); font-size: 1.02rem; line-height: 1.75; margin-bottom: 14px; }
 
-    @media (max-width: 768px) {
-      .nav-links, .nav-cta { display: none; }
-      .nav-burger { display: flex; }
-      .section { padding: var(--sp-16) 0; }
-      .about-perks { grid-template-columns: 1fr; }
-    }
+.perks {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px;
+}
+.perk {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 16px; border-radius: var(--r-md);
+  background: var(--white); border: 1px solid var(--cream-3);
+  transition: box-shadow .2s, transform .2s;
+}
+.perk:hover { box-shadow: var(--sh-sm); transform: translateY(-1px); }
+.perk-ico {
+  width: 38px; height: 38px; border-radius: var(--r-sm);
+  background: var(--rose-lt); display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.perk-ico svg { width: 18px; height: 18px; color: var(--rose); }
+.perk-t strong { display: block; font-size: .875rem; font-weight: 600; color: var(--brown); margin-bottom: 2px; }
+.perk-t span { font-size: .78rem; color: var(--brown-mid); line-height: 1.4; }
 
-    @media (max-width: 480px) {
-      .hero-stats { gap: var(--sp-5); }
-      .price-grid { grid-template-columns: 1fr; }
-      .contacts-grid { grid-template-columns: 1fr 1fr; }
-    }
+/* ═══════════════════════════════════════════════════════════
+   CONTACTS
+═══════════════════════════════════════════════════════════ */
+#contacts {
+  background: var(--brown); /* #2C1810 */
+  color: rgba(253,250,245,.88);
+  padding: 96px 0;
+}
+#contacts .sh-title { color: rgba(253,250,245,.95); }
+#contacts .sh-eye { color: var(--beige); }
+#contacts .sh-eye::before, #contacts .sh-eye::after { background: var(--beige); }
+#contacts .sh-rule { background: linear-gradient(90deg, var(--rose), rgba(196,137,108,.15)); }
 
-    @media (max-width: 375px) {
-      .contacts-grid { grid-template-columns: 1fr; }
-      .hero-actions { flex-direction: column; }
-      .hero-actions .btn { justify-content: center; }
-    }
+.c-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px; margin-bottom: 48px;
+}
+.c-card {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: var(--r-lg); padding: 28px 24px;
+  transition: background .2s, border-color .2s;
+}
+.c-card:hover { background: rgba(255,255,255,.09); border-color: rgba(196,137,108,.3); }
+.c-card-ico {
+  width: 44px; height: 44px; border-radius: var(--r-sm);
+  background: rgba(196,137,108,.18);
+  display: flex; align-items: center; justify-content: center; margin-bottom: 16px;
+}
+.c-card-ico svg { width: 22px; height: 22px; color: var(--rose); }
+.c-card-lbl { font-size: .68rem; letter-spacing: .15em; text-transform: uppercase; color: rgba(253,250,245,.38); margin-bottom: 6px; }
+.c-card-val { font-size: .97rem; color: rgba(253,250,245,.85); line-height: 1.6; }
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════════════ */
+footer {
+  background: #150A03;
+  text-align: center; padding: 22px 24px;
+  font-size: .8rem; color: rgba(253,250,245,.28); letter-spacing: .05em;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FAB WHATSAPP
+═══════════════════════════════════════════════════════════ */
+.fab {
+  position: fixed; bottom: 28px; right: 28px; z-index: 500;
+  width: 56px; height: 56px; border-radius: 50%;
+  background: #22C55E; color: #fff; border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(34,197,94,.45);
+  transition: transform .25s, box-shadow .25s;
+}
+.fab:hover { transform: scale(1.1) translateY(-2px); box-shadow: 0 12px 36px rgba(34,197,94,.55); }
+.fab svg { width: 28px; height: 28px; }
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .about-grid { grid-template-columns: 1fr; gap: 48px; }
+  .af-1 { right: -8px; }
+  .af-2 { left: -8px; }
+  .section { padding: 72px 0; }
+}
+
+@media (max-width: 600px) {
+  .hero-title { line-height: 1; }
+  .perks { grid-template-columns: 1fr; }
+  .price-grid { grid-template-columns: 1fr; }
+  .c-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 380px) {
+  .c-grid { grid-template-columns: 1fr; }
+  .hero-chips { flex-direction: column; }
+}
   </style>
 </head>
 <body>
 
-<!-- ═══ SKIP LINK (a11y) ════════════════════════════════════════════ -->
-<a href="#main" style="position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden;z-index:9999;
-  padding:8px 16px;background:var(--color-primary);color:#fff;border-radius:0 0 8px 0;font-weight:600;"
-  onfocus="this.style.left='0';this.style.width='auto';this.style.height='auto';"
-  onblur="this.style.left='-999px';this.style.width='1px';this.style.height='1px';">
-  Перейти к содержимому
-</a>
+<a href="#main" class="skip">Перейти к содержимому</a>
 
-<!-- ═══ NAV ═════════════════════════════════════════════════════════ -->
+<!-- ═══ NAV ═══════════════════════════════════════════════════════ -->
 <nav id="nav" role="navigation" aria-label="Основная навигация">
-  <div class="container">
-    <div class="nav-wrap">
-      <a href="#hero" class="nav-logo" aria-label="DA Nail Studio Beauty Bar — на главную">
-        <div class="nav-logo-icon" aria-hidden="true">
-          <!-- Nail / sparkle icon -->
-          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2C8.5 2 6 5 6 8.5c0 3 1.5 5 3 6.5l3 3 3-3c1.5-1.5 3-3.5 3-6.5C18 5 15.5 2 12 2z"/>
-            <path d="M9 8.5c0-1.7 1.3-3 3-3"/>
-          </svg>
-        </div>
-        DA <span>&nbsp;Beauty</span>
+  <div class="wrap">
+    <div class="nav-in">
+      <a href="#hero" class="nav-logo" aria-label="На главную">
+        <div class="nav-logo-dot" aria-hidden="true"></div>
+        DA <span>&thinsp;Beauty</span>
       </a>
 
-      <div class="nav-links" role="list">
-        <a href="#services" role="listitem">Услуги</a>
-        <a href="#about" role="listitem">О нас</a>
-        <a href="#contacts" role="listitem">Контакты</a>
+      <div class="nav-links">
+        <a href="#services">Услуги</a>
+        <a href="#about">О нас</a>
+        <a href="#contacts">Контакты</a>
       </div>
 
-      <a href="https://2gis.kz/almaty/geo/70000001099681563" class="nav-cta" target="_blank" rel="noopener" aria-label="Открыть на карте 2ГИС (откроется в новой вкладке)">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-        </svg>
-        Найти нас
-      </a>
+      <div class="nav-action">
+        <a href="https://2gis.kz/almaty/geo/70000001099681563" class="btn btn-primary" target="_blank" rel="noopener" style="min-height:40px;padding:0 20px;font-size:.8rem;" aria-label="Открыть на карте 2ГИС">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Найти нас
+        </a>
+      </div>
 
-      <button class="nav-burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav-mobile" id="burger">
-        <span class="nav-burger-line"></span>
-        <span class="nav-burger-line"></span>
-        <span class="nav-burger-line"></span>
+      <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="mob">
+        <span class="burger-l"></span>
+        <span class="burger-l"></span>
+        <span class="burger-l"></span>
       </button>
     </div>
   </div>
-
-  <!-- Mobile menu -->
-  <div id="nav-mobile" role="menu" aria-labelledby="burger">
-    <a href="#services" class="nav-mobile-link" role="menuitem">Услуги и цены</a>
-    <a href="#about"    class="nav-mobile-link" role="menuitem">О нас</a>
-    <a href="#contacts" class="nav-mobile-link" role="menuitem">Контакты</a>
-    <div class="nav-mobile-cta">
+  <div id="mob" role="menu">
+    <a href="#services" class="mob-a" role="menuitem">Услуги и цены</a>
+    <a href="#about"    class="mob-a" role="menuitem">О нас</a>
+    <a href="#contacts" class="mob-a" role="menuitem">Контакты</a>
+    <div class="mob-btns">
       <a href="https://2gis.kz/almaty/geo/70000001099681563" class="btn btn-primary" target="_blank" rel="noopener">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        Как добраться
+        Открыть в 2ГИС
       </a>
     </div>
   </div>
 </nav>
 
-<!-- ═══ MAIN ═════════════════════════════════════════════════════════ -->
 <main id="main">
 
-<!-- ═══ HERO ════════════════════════════════════════════════════════ -->
-<section id="hero" aria-labelledby="hero-title">
+<!-- ═══ HERO ═══════════════════════════════════════════════════════ -->
+<section id="hero">
   <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-pattern" aria-hidden="true"></div>
 
-  <!-- Top-right floral decoration -->
-  <svg class="hero-deco hero-deco-tr" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g fill="none" stroke="#C4896C" stroke-width="1">
-      <circle cx="200" cy="200" r="180" opacity=".15"/>
-      <circle cx="200" cy="200" r="140" opacity=".12"/>
-      <circle cx="200" cy="200" r="100" opacity=".1"/>
-      <path d="M200 20 C160 70 100 100 20 100 C100 100 130 160 200 180 C270 160 300 100 380 100 C300 100 240 70 200 20Z" opacity=".4"/>
-      <path d="M200 380 C160 330 100 300 20 300 C100 300 130 240 200 220 C270 240 300 300 380 300 C300 300 240 330 200 380Z" opacity=".3"/>
-      <path d="M20 200 C70 160 100 100 100 20 C100 100 160 130 180 200 C160 270 100 300 100 380 C100 300 70 240 20 200Z" opacity=".3"/>
-      <path d="M380 200 C330 160 300 100 300 20 C300 100 240 130 220 200 C240 270 300 300 300 380 C300 300 330 240 380 200Z" opacity=".3"/>
-      <circle cx="200" cy="200" r="20" fill="#C4896C" opacity=".15"/>
-      <circle cx="200" cy="20"  r="6" fill="#C4896C" opacity=".25"/>
-      <circle cx="200" cy="380" r="6" fill="#C4896C" opacity=".25"/>
-      <circle cx="20"  cy="200" r="6" fill="#C4896C" opacity=".25"/>
-      <circle cx="380" cy="200" r="6" fill="#C4896C" opacity=".25"/>
+  <!-- Right floral -->
+  <svg class="hero-deco-r" viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g fill="none" stroke="#C4896C" stroke-width="1.2">
+      <circle cx="250" cy="250" r="200" opacity=".3"/>
+      <circle cx="250" cy="250" r="150" opacity=".2"/>
+      <circle cx="250" cy="250" r="100" opacity=".15"/>
+      <path d="M250 50 C220 100 200 150 200 250 C200 350 220 400 250 450 C280 400 300 350 300 250 C300 150 280 100 250 50Z" opacity=".5"/>
+      <path d="M50 250 C100 220 150 200 250 200 C350 200 400 220 450 250 C400 280 350 300 250 300 C150 300 100 280 50 250Z" opacity=".5"/>
+      <path d="M109 109 C140 160 160 200 250 250 C160 200 200 140 109 109Z" opacity=".35"/>
+      <path d="M391 109 C360 160 340 200 250 250 C340 200 300 140 391 109Z" opacity=".35"/>
+      <path d="M109 391 C140 340 160 300 250 250 C160 300 200 360 109 391Z" opacity=".35"/>
+      <path d="M391 391 C360 340 340 300 250 250 C340 300 300 360 391 391Z" opacity=".35"/>
+      <circle cx="250" cy="250" r="22" fill="#C4896C" opacity=".2"/>
+      <circle cx="250" cy="50"  r="7" fill="#C4896C" opacity=".3"/>
+      <circle cx="250" cy="450" r="7" fill="#C4896C" opacity=".3"/>
+      <circle cx="50"  cy="250" r="7" fill="#C4896C" opacity=".3"/>
+      <circle cx="450" cy="250" r="7" fill="#C4896C" opacity=".3"/>
+      <!-- stems -->
+      <path d="M250 450 Q270 500 260 560" stroke-width=".8" opacity=".3"/>
+      <path d="M300 420 Q340 470 330 540" stroke-width=".8" opacity=".3"/>
+      <circle cx="260" cy="560" r="4" fill="#C4896C" opacity=".2"/>
+      <circle cx="330" cy="540" r="4" fill="#C4896C" opacity=".2"/>
     </g>
   </svg>
 
-  <!-- Bottom-left decoration -->
-  <svg class="hero-deco hero-deco-bl" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <!-- Bottom-left floral -->
+  <svg class="hero-deco-l" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
     <g fill="none" stroke="#C4896C" stroke-width="1">
-      <path d="M150 10 C120 50 70 70 10 70 C70 70 90 120 150 140 C210 120 230 70 290 70 C230 70 180 50 150 10Z" opacity=".4"/>
-      <path d="M150 290 C120 250 70 230 10 230 C70 230 90 180 150 160 C210 180 230 230 290 230 C230 230 180 250 150 290Z" opacity=".3"/>
-      <circle cx="150" cy="150" r="16" fill="#C4896C" opacity=".12"/>
+      <circle cx="150" cy="150" r="110" opacity=".25"/>
+      <path d="M150 40 C132 80 130 110 150 150 C170 110 168 80 150 40Z" opacity=".4"/>
+      <path d="M150 260 C132 220 130 190 150 150 C170 190 168 220 150 260Z" opacity=".4"/>
+      <path d="M40 150 C80 132 110 130 150 150 C110 170 80 168 40 150Z" opacity=".4"/>
+      <path d="M260 150 C220 132 190 130 150 150 C190 170 220 168 260 150Z" opacity=".4"/>
+      <circle cx="150" cy="150" r="15" fill="#C4896C" opacity=".15"/>
     </g>
   </svg>
 
-  <div class="container">
-    <div class="hero-inner">
-      <!-- Copy -->
-      <div class="hero-copy">
-        <div class="hero-eyebrow" aria-label="Beauty Studio в Алматы">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-          Beauty Studio · Алматы
-        </div>
-
-        <h1 class="hero-title" id="hero-title">
-          <strong>DA Nail Studio</strong>
-          <em>Beauty Bar</em>
-        </h1>
-
-        <p class="hero-desc">
-          Маникюр, педикюр и парикмахерские услуги в уютной студии района Мамыр. Профессиональные мастера, качественные материалы.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#services" class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
-            Прайс-лист
-          </a>
-          <a href="https://2gis.kz/almaty/geo/70000001099681563" class="btn btn-outline" target="_blank" rel="noopener" aria-label="Открыть в 2ГИС (откроется в новой вкладке)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-            Как добраться
-          </a>
-        </div>
-
-        <div class="hero-stats" aria-label="Ключевые факты">
-          <div class="hero-stat">
-            <span class="hero-stat-num">10–20</span>
-            <span class="hero-stat-label">Часы работы</span>
-          </div>
-          <div class="hero-stat" aria-hidden="true" style="width:1px;background:var(--color-border);flex-shrink:0;"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">7+</span>
-            <span class="hero-stat-label">Лет опыта</span>
-          </div>
-          <div class="hero-stat" aria-hidden="true" style="width:1px;background:var(--color-border);flex-shrink:0;"></div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">15+</span>
-            <span class="hero-stat-label">Услуг</span>
-          </div>
-        </div>
+  <div class="wrap">
+    <div class="hero-content reveal">
+      <div class="hero-badge">
+        <span class="hero-badge-dot" aria-hidden="true"></span>
+        Beauty Studio · Алматы · Мамыр
       </div>
 
-      <!-- Visual card -->
-      <div class="hero-visual" aria-hidden="true">
-        <div class="hero-card-main">
-          <div class="hero-card-bg"></div>
+      <h1 class="hero-title">DA Nail Studio</h1>
+      <span class="hero-title-sub">Beauty Bar</span>
 
-          <!-- Floral SVG in card -->
-          <svg class="hero-card-floral" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
-            <g fill="none" stroke="#C4896C" stroke-width="1.2" opacity=".6">
-              <circle cx="280" cy="80" r="60"/><circle cx="280" cy="80" r="40"/>
-              <path d="M280 20 C265 45 265 65 280 80 C295 65 295 45 280 20Z" fill="#C4896C" opacity=".15"/>
-              <path d="M280 140 C265 115 265 95 280 80 C295 95 295 115 280 140Z" fill="#C4896C" opacity=".15"/>
-              <path d="M220 80 C245 65 265 65 280 80 C265 95 245 95 220 80Z" fill="#C4896C" opacity=".15"/>
-              <path d="M340 80 C315 65 295 65 280 80 C295 95 315 95 340 80Z" fill="#C4896C" opacity=".15"/>
-              <circle cx="280" cy="80" r="12" fill="#C4896C" opacity=".3"/>
-              <circle cx="80" cy="320" r="44"/><circle cx="80" cy="320" r="28"/>
-              <path d="M80 276 C68 296 68 308 80 320 C92 308 92 296 80 276Z" fill="#EDD9C4" opacity=".4"/>
-              <path d="M80 364 C68 344 68 332 80 320 C92 332 92 344 80 364Z" fill="#EDD9C4" opacity=".4"/>
-              <path d="M36 320 C56 308 68 308 80 320 C68 332 56 332 36 320Z" fill="#EDD9C4" opacity=".4"/>
-              <path d="M124 320 C104 308 92 308 80 320 C92 332 104 332 124 320Z" fill="#EDD9C4" opacity=".4"/>
-              <circle cx="80" cy="320" r="9" fill="#C4896C" opacity=".25"/>
-              <!-- stems -->
-              <path d="M160 160 Q220 200 240 260" stroke-width=".8"/>
-              <path d="M300 180 Q340 280 320 360" stroke-width=".8"/>
-              <path d="M60 100 Q100 140 140 160" stroke-width=".8"/>
-              <!-- small accent dots -->
-              <circle cx="160" cy="200" r="3" fill="#C4896C" opacity=".3"/>
-              <circle cx="220" cy="280" r="3" fill="#C4896C" opacity=".3"/>
-              <circle cx="320" cy="360" r="3" fill="#C4896C" opacity=".3"/>
-            </g>
-          </svg>
+      <p class="hero-desc">
+        Маникюр, педикюр и парикмахерские услуги в уютной студии района Мамыр. Профессиональные мастера, качественные материалы, тёплая атмосфера.
+      </p>
 
-          <div class="hero-card-center">
-            <!-- nothing — let background breathe -->
-          </div>
+      <div class="btn-row">
+        <a href="#services" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+          Прайс-лист
+        </a>
+        <a href="https://2gis.kz/almaty/geo/70000001099681563" class="btn btn-outline-light" target="_blank" rel="noopener" aria-label="Открыть в 2ГИС">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Как добраться
+        </a>
+      </div>
 
-          <div class="hero-card-info">
-            <div class="hero-card-info-name">DA Nail Studio</div>
-            <div class="hero-card-info-sub">ул. Керуентау 2/1, Мамыр</div>
-            <div class="hero-card-info-chips">
-              <span class="chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                10:00–20:00
-              </span>
-              <span class="chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                Карта / QR
-              </span>
-              <span class="chip">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
-                Wi-Fi
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Floating badges -->
-        <div class="hero-badge hero-badge-1">
-          <div class="hero-badge-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-          </div>
-          <div class="hero-badge-text">
-            <strong>Ежедневно</strong>
-            Без выходных
-          </div>
-        </div>
-        <div class="hero-badge hero-badge-2">
-          <div class="hero-badge-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          </div>
-          <div class="hero-badge-text">
-            <strong>Мастера</strong>
-            Профессионалы
-          </div>
-        </div>
+      <div class="hero-chips">
+        <span class="hero-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          Ежедневно 10:00 – 20:00
+        </span>
+        <span class="hero-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          Наличные · Карта · QR
+        </span>
+        <span class="hero-chip">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          Бесплатный Wi-Fi
+        </span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ SERVICES ════════════════════════════════════════════════════ -->
-<section id="services" class="section" aria-labelledby="services-title">
-  <div class="container">
-    <div class="sec-head reveal">
-      <div class="sec-eyebrow" aria-hidden="true">Прайс-лист</div>
-      <h2 class="sec-title" id="services-title">Наши <em>услуги</em></h2>
-      <div class="sec-rule" aria-hidden="true"></div>
+<!-- ornament divider -->
+<div class="ornament" style="background:var(--cream);padding:28px 24px;" aria-hidden="true">
+  <div class="ornament-line"></div>
+  <svg class="ornament-svg" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M20 4 C17 9 15 13 15 20 C15 27 17 31 20 36 C23 31 25 27 25 20 C25 13 23 9 20 4Z" stroke="currentColor" stroke-width="1"/>
+    <path d="M4 20 C9 17 13 15 20 15 C27 15 31 17 36 20 C31 23 27 25 20 25 C13 25 9 23 4 20Z" stroke="currentColor" stroke-width="1"/>
+    <circle cx="20" cy="20" r="4" fill="currentColor" opacity=".5"/>
+    <circle cx="20" cy="4"  r="2" fill="currentColor" opacity=".4"/>
+    <circle cx="20" cy="36" r="2" fill="currentColor" opacity=".4"/>
+    <circle cx="4"  cy="20" r="2" fill="currentColor" opacity=".4"/>
+    <circle cx="36" cy="20" r="2" fill="currentColor" opacity=".4"/>
+  </svg>
+  <div class="ornament-line"></div>
+</div>
+
+<!-- ═══ SERVICES ══════════════════════════════════════════════════ -->
+<section id="services" class="section">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div class="sh-eye">Прайс-лист</div>
+      <h2 class="sh-title">Наши <em>услуги</em></h2>
+      <div class="sh-rule"></div>
     </div>
 
-    <div class="tabs-wrap reveal" role="tablist" aria-label="Категории услуг">
-      <button
-        class="tab-btn active"
-        role="tab"
-        aria-selected="true"
-        aria-controls="tab-mani"
-        id="btn-mani"
-        data-tab="mani"
-      >
-        <!-- Nail icon -->
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C9 2 7 4.5 7 7.5c0 2.5 1.2 4.2 2.5 5.5L12 16l2.5-3c1.3-1.3 2.5-3 2.5-5.5C17 4.5 15 2 12 2z"/><path d="M9 7.5c0-1.4 1.3-2.5 3-2.5"/></svg>
+    <div class="tabs-row reveal" role="tablist" aria-label="Категории услуг">
+      <button class="tab-btn on" role="tab" aria-selected="true" aria-controls="tp-mani" id="tb-mani" data-tab="mani">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C9 2 7 4.5 7 7.5c0 2.5 1.2 4.2 2.5 5.5L12 16l2.5-3C15.8 11.7 17 10 17 7.5 17 4.5 15 2 12 2z"/><path d="M9 7.5c0-1.4 1.3-2.5 3-2.5"/></svg>
         Маникюр &amp; Педикюр
       </button>
-      <button
-        class="tab-btn"
-        role="tab"
-        aria-selected="false"
-        aria-controls="tab-hair"
-        id="btn-hair"
-        data-tab="hair"
-      >
-        <!-- Scissors icon -->
+      <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tp-hair" id="tb-hair" data-tab="hair">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
         Парикмахерские
       </button>
     </div>
 
     <!-- Маникюр / Педикюр -->
-    <div class="tab-panel active" id="tab-mani" role="tabpanel" aria-labelledby="btn-mani">
+    <div class="tab-panel on" id="tp-mani" role="tabpanel" aria-labelledby="tb-mani">
       <div class="price-grid">
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Маникюр без покрытия</div></div>
-          <div class="price-card-price">4 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Маникюр гель-лак</div></div>
-          <div class="price-card-price">8 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Педикюр лак обычный</div></div>
-          <div class="price-card-price">8 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Педикюр гель-лак</div></div>
-          <div class="price-card-price">9 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Смарт педикюр</div></div>
-          <div class="price-card-price">9 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Наращивание ногтей</div></div>
-          <div class="price-card-price">13 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Френч</div></div>
-          <div class="price-card-price">9 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Чужое снятие</div></div>
-          <div class="price-card-price">1 500 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Ремонт ногтя</div></div>
-          <div class="price-card-price">500 ₸</div>
-        </div>
+        <div class="price-card reveal-up"><div class="price-num">1</div><div class="price-body"><div class="price-name">Маникюр без покрытия</div></div><div class="price-val">4 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">2</div><div class="price-body"><div class="price-name">Маникюр гель-лак</div></div><div class="price-val">8 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">3</div><div class="price-body"><div class="price-name">Педикюр лак обычный</div></div><div class="price-val">8 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">4</div><div class="price-body"><div class="price-name">Педикюр гель-лак</div></div><div class="price-val">9 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">5</div><div class="price-body"><div class="price-name">Смарт педикюр</div></div><div class="price-val">9 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">6</div><div class="price-body"><div class="price-name">Наращивание ногтей</div></div><div class="price-val">13 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">7</div><div class="price-body"><div class="price-name">Френч</div></div><div class="price-val">9 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">8</div><div class="price-body"><div class="price-name">Чужое снятие</div></div><div class="price-val">1 500 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">9</div><div class="price-body"><div class="price-name">Ремонт ногтя</div></div><div class="price-val">500 ₸</div></div>
       </div>
     </div>
 
     <!-- Парикмахерские -->
-    <div class="tab-panel" id="tab-hair" role="tabpanel" aria-labelledby="btn-hair">
+    <div class="tab-panel" id="tp-hair" role="tabpanel" aria-labelledby="tb-hair">
       <div class="price-grid">
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Мужская стрижка</div></div>
-          <div class="price-card-price">3 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left">
-            <div class="price-card-name">Женская стрижка</div>
-            <div class="price-card-note">от</div>
-          </div>
-          <div class="price-card-price">4 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left">
-            <div class="price-card-name">Покраска в один тон</div>
-            <div class="price-card-note">от</div>
-          </div>
-          <div class="price-card-price">8 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left">
-            <div class="price-card-name">Сложное окрашивание</div>
-            <div class="price-card-note">от</div>
-          </div>
-          <div class="price-card-price">30 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left">
-            <div class="price-card-name">Укладка</div>
-            <div class="price-card-note">от</div>
-          </div>
-          <div class="price-card-price">4 000 ₸</div>
-        </div>
-        <div class="price-card reveal-fast">
-          <div class="price-card-left"><div class="price-card-name">Реконструкция волос</div></div>
-          <div class="price-card-price">5 000 ₸</div>
-        </div>
+        <div class="price-card reveal-up"><div class="price-num">1</div><div class="price-body"><div class="price-name">Мужская стрижка</div></div><div class="price-val">3 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">2</div><div class="price-body"><div class="price-name">Женская стрижка</div><div class="price-note">от</div></div><div class="price-val">4 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">3</div><div class="price-body"><div class="price-name">Покраска в один тон</div><div class="price-note">от</div></div><div class="price-val">8 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">4</div><div class="price-body"><div class="price-name">Сложное окрашивание</div><div class="price-note">от</div></div><div class="price-val">30 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">5</div><div class="price-body"><div class="price-name">Укладка</div><div class="price-note">от</div></div><div class="price-val">4 000 ₸</div></div>
+        <div class="price-card reveal-up"><div class="price-num">6</div><div class="price-body"><div class="price-name">Реконструкция волос</div></div><div class="price-val">5 000 ₸</div></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ ABOUT ════════════════════════════════════════════════════════ -->
-<section id="about" class="section section-alt" aria-labelledby="about-title">
-  <div class="container">
+<!-- ornament divider -->
+<div class="ornament" style="background:var(--cream-2);padding:28px 24px;" aria-hidden="true">
+  <div class="ornament-line"></div>
+  <svg class="ornament-svg" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16 3 C13 8 13 12 16 16 C19 12 19 8 16 3Z" stroke="currentColor" stroke-width="1" fill="currentColor" opacity=".2"/>
+    <path d="M16 29 C13 24 13 20 16 16 C19 20 19 24 16 29Z" stroke="currentColor" stroke-width="1" fill="currentColor" opacity=".2"/>
+    <path d="M3 16 C8 13 12 13 16 16 C12 19 8 19 3 16Z" stroke="currentColor" stroke-width="1" fill="currentColor" opacity=".2"/>
+    <path d="M29 16 C24 13 20 13 16 16 C20 19 24 19 29 16Z" stroke="currentColor" stroke-width="1" fill="currentColor" opacity=".2"/>
+    <circle cx="16" cy="16" r="3" fill="currentColor" opacity=".5"/>
+  </svg>
+  <div class="ornament-line"></div>
+</div>
+
+<!-- ═══ ABOUT ═══════════════════════════════════════════════════════ -->
+<section id="about" class="section bg-cream">
+  <div class="wrap">
     <div class="about-grid">
 
-      <!-- Visual -->
-      <div class="about-visual reveal">
-        <div class="about-vis-main">
-          <div class="about-vis-deco" aria-hidden="true">
-            <svg viewBox="0 0 400 530" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-              <g fill="none" stroke="#C4896C" stroke-width="1.5">
-                <circle cx="200" cy="200" r="130" opacity=".3"/>
-                <path d="M200 70 C175 110 155 145 155 200 C155 255 175 290 200 330 C225 290 245 255 245 200 C245 145 225 110 200 70Z" opacity=".35"/>
-                <path d="M70 200 C110 175 145 155 200 155 C255 155 290 175 330 200 C290 225 255 245 200 245 C145 245 110 225 70 200Z" opacity=".35"/>
-                <circle cx="200" cy="200" r="28" fill="#C4896C" opacity=".15"/>
-                <circle cx="200" cy="70"  r="8" fill="#C4896C" opacity=".2"/>
-                <circle cx="200" cy="330" r="8" fill="#C4896C" opacity=".2"/>
-                <circle cx="70"  cy="200" r="8" fill="#C4896C" opacity=".2"/>
-                <circle cx="330" cy="200" r="8" fill="#C4896C" opacity=".2"/>
-                <!-- leaf branches -->
-                <path d="M120 400 Q140 360 160 330" stroke-width="1"/>
-                <path d="M140 430 Q160 390 180 360" stroke-width="1"/>
-                <path d="M280 400 Q260 360 240 330" stroke-width="1"/>
-                <circle cx="120" cy="400" r="5" fill="#C4896C" opacity=".2"/>
-                <circle cx="140" cy="430" r="5" fill="#C4896C" opacity=".2"/>
-                <circle cx="280" cy="400" r="5" fill="#C4896C" opacity=".2"/>
-              </g>
+      <!-- visual -->
+      <div class="about-vis reveal">
+        <div class="about-vis-card">
+          <div class="about-vis-bg" aria-hidden="true"></div>
+          <div class="about-vis-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 2C9 2 7 4.5 7 7.5c0 2.5 1.2 4.2 2.5 5.5L12 16l2.5-3C15.8 11.7 17 10 17 7.5 17 4.5 15 2 12 2z"/>
+              <path d="M9 7.5c0-1.4 1.3-2.5 3-2.5"/>
+              <path d="M5 21c2-2 4-3 7-3s5 1 7 3"/>
             </svg>
-          </div>
-          <div class="about-vis-center">
-            <div class="about-vis-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2C9 2 7 4.5 7 7.5c0 2.5 1.2 4.2 2.5 5.5L12 16l2.5-3c1.3-1.3 2.5-3 2.5-5.5C17 4.5 15 2 12 2z"/>
-                <path d="M9 7.5c0-1.4 1.3-2.5 3-2.5"/>
-                <path d="M5 20c2-2 4-3 7-3s5 1 7 3"/>
-              </svg>
-            </div>
           </div>
         </div>
 
-        <!-- Floating cards -->
-        <div class="about-float about-float-1" aria-label="Опыт работы">
-          <div class="float-num">7+</div>
-          <div class="float-label">лет опыта</div>
+        <div class="af af-1" aria-label="Опыт работы">
+          <div class="af-num">7+</div>
+          <div class="af-lbl">лет опыта</div>
         </div>
-        <div class="about-float about-float-2">
-          <div class="float-row">
-            <div class="float-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
-            </div>
-            <div class="float-text">
-              <strong>Бесплатный Wi-Fi</strong>
-              <span>Для клиентов</span>
-            </div>
+        <div class="af af-2">
+          <div class="af-ico">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          </div>
+          <div class="af-t">
+            <strong>Wi-Fi</strong>
+            <span>Для клиентов</span>
           </div>
         </div>
       </div>
 
-      <!-- Text -->
-      <div class="about-text reveal">
-        <div class="sec-eyebrow" aria-hidden="true">О нас</div>
-        <h2 id="about-title">
-          Красота —<br>это наш <em>язык</em>
-        </h2>
-        <p>
-          DA Nail Studio Beauty Bar — это уютная студия красоты в сердце района Мамыр, Алматы. Мы создаём пространство, где каждая клиентка чувствует себя особенной.
-        </p>
-        <p>
-          Работаем ежедневно без выходных, чтобы вы всегда могли найти время для себя. Профессиональные мастера, качественные материалы и тёплая атмосфера — наши главные приоритеты.
-        </p>
+      <!-- text -->
+      <div class="about-txt reveal">
+        <div class="sh-eye" style="justify-content:flex-start;">О нас</div>
+        <h2 style="margin-top:10px;">Красота —<br>это наш <em>язык</em></h2>
+        <p>DA Nail Studio Beauty Bar — уютная студия красоты в сердце района Мамыр, Алматы. Мы создаём пространство, где каждая клиентка чувствует себя особенной.</p>
+        <p>Работаем ежедневно без выходных. Профессиональные мастера, качественные материалы и тёплая атмосфера — наши главные приоритеты.</p>
 
-        <div class="about-perks">
+        <div class="perks">
           <div class="perk">
-            <div class="perk-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C9 2 7 4.5 7 7.5c0 2.5 1.2 4.2 2.5 5.5L12 16l2.5-3c1.3-1.3 2.5-3 2.5-5.5C17 4.5 15 2 12 2z"/></svg>
+            <div class="perk-ico">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2C9 2 7 4.5 7 7.5c0 2.5 1.2 4.2 2.5 5.5L12 16l2.5-3C15.8 11.7 17 10 17 7.5 17 4.5 15 2 12 2z"/></svg>
             </div>
-            <div>
-              <div class="perk-title">Маникюр и педикюр</div>
-              <div class="perk-desc">Гель-лак, наращивание, смарт-педикюр</div>
-            </div>
+            <div class="perk-t"><strong>Маникюр и педикюр</strong><span>Гель-лак, наращивание, смарт-педикюр</span></div>
           </div>
           <div class="perk">
-            <div class="perk-icon">
+            <div class="perk-ico">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
             </div>
-            <div>
-              <div class="perk-title">Парикмахерские</div>
-              <div class="perk-desc">Стрижки, окрашивание, укладки</div>
-            </div>
+            <div class="perk-t"><strong>Парикмахерские</strong><span>Стрижки, окрашивание, укладки</span></div>
           </div>
           <div class="perk">
-            <div class="perk-icon">
+            <div class="perk-ico">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
             </div>
-            <div>
-              <div class="perk-title">Бесплатный Wi-Fi</div>
-              <div class="perk-desc">Для комфортного ожидания</div>
-            </div>
+            <div class="perk-t"><strong>Бесплатный Wi-Fi</strong><span>Для комфортного ожидания</span></div>
           </div>
           <div class="perk">
-            <div class="perk-icon">
+            <div class="perk-ico">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
             </div>
-            <div>
-              <div class="perk-title">Удобная оплата</div>
-              <div class="perk-desc">Наличные, карта, QR-код</div>
-            </div>
+            <div class="perk-t"><strong>Удобная оплата</strong><span>Наличные, карта, QR-код</span></div>
           </div>
         </div>
       </div>
@@ -1308,56 +867,59 @@
   </div>
 </section>
 
-<!-- ═══ CONTACTS ════════════════════════════════════════════════════ -->
-<section id="contacts" aria-labelledby="contacts-title">
-  <div class="container">
-    <div class="sec-head reveal">
-      <div class="sec-eyebrow" aria-hidden="true">Найти нас</div>
-      <h2 class="sec-title" id="contacts-title">Контакты</h2>
-      <div class="sec-rule" aria-hidden="true"></div>
+<!-- ornament divider -->
+<div class="ornament" style="background:var(--cream-2);padding:28px 24px;" aria-hidden="true">
+  <div class="ornament-line"></div>
+  <svg class="ornament-svg" width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="14" cy="14" r="11" stroke="currentColor" stroke-width="1"/>
+    <circle cx="14" cy="14" r="6" stroke="currentColor" stroke-width="1" opacity=".5"/>
+    <circle cx="14" cy="14" r="2" fill="currentColor" opacity=".6"/>
+    <line x1="14" y1="3" x2="14" y2="0" stroke="currentColor" stroke-width="1" opacity=".4"/>
+    <line x1="14" y1="25" x2="14" y2="28" stroke="currentColor" stroke-width="1" opacity=".4"/>
+    <line x1="3" y1="14" x2="0" y2="14" stroke="currentColor" stroke-width="1" opacity=".4"/>
+    <line x1="25" y1="14" x2="28" y2="14" stroke="currentColor" stroke-width="1" opacity=".4"/>
+  </svg>
+  <div class="ornament-line"></div>
+</div>
+
+<!-- ═══ CONTACTS ═══════════════════════════════════════════════════ -->
+<section id="contacts">
+  <div class="wrap">
+    <div class="sh reveal">
+      <div class="sh-eye">Найти нас</div>
+      <h2 class="sh-title" style="color:rgba(253,250,245,.95);">Контакты</h2>
+      <div class="sh-rule"></div>
     </div>
 
-    <div class="contacts-grid">
-      <div class="contact-card reveal-fast">
-        <div class="contact-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        </div>
-        <div class="contact-card-label">Адрес</div>
-        <div class="contact-card-value">ул. Керуентау 2/1<br>район Мамыр, Алматы</div>
+    <div class="c-grid">
+      <div class="c-card reveal-up">
+        <div class="c-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <div class="c-card-lbl">Адрес</div>
+        <div class="c-card-val">ул. Керуентау 2/1<br>район Мамыр, Алматы</div>
       </div>
-
-      <div class="contact-card reveal-fast">
-        <div class="contact-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="contact-card-label">Режим работы</div>
-        <div class="contact-card-value">Ежедневно<br>10:00 — 20:00</div>
+      <div class="c-card reveal-up">
+        <div class="c-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div class="c-card-lbl">Режим работы</div>
+        <div class="c-card-val">Ежедневно<br>10:00 — 20:00</div>
       </div>
-
-      <div class="contact-card reveal-fast">
-        <div class="contact-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-        </div>
-        <div class="contact-card-label">Оплата</div>
-        <div class="contact-card-value">Наличные<br>Банковская карта · QR</div>
+      <div class="c-card reveal-up">
+        <div class="c-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+        <div class="c-card-lbl">Оплата</div>
+        <div class="c-card-val">Наличные<br>Карта · QR-код</div>
       </div>
-
-      <div class="contact-card reveal-fast">
-        <div class="contact-card-icon">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
-        </div>
-        <div class="contact-card-label">Для клиентов</div>
-        <div class="contact-card-value">Бесплатный Wi-Fi</div>
+      <div class="c-card reveal-up">
+        <div class="c-card-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
+        <div class="c-card-lbl">Для клиентов</div>
+        <div class="c-card-val">Бесплатный Wi-Fi</div>
       </div>
     </div>
 
-    <div class="contacts-actions reveal">
-      <a href="https://wa.me/НОМЕР_ТЕЛЕФОНА" class="btn btn-wa" target="_blank" rel="noopener" aria-label="Написать в WhatsApp (откроется в новой вкладке)">
-        <!-- WhatsApp SVG logo -->
+    <div class="btn-row btn-row--center reveal">
+      <a href="https://wa.me/НОМЕР_ТЕЛЕФОНА" class="btn btn-wa" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
         <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
         WhatsApp
       </a>
-      <a href="https://2gis.kz/almaty/geo/70000001099681563" class="btn btn-2gis" target="_blank" rel="noopener" aria-label="Открыть в 2ГИС (откроется в новой вкладке)">
+      <a href="https://2gis.kz/almaty/geo/70000001099681563" class="btn btn-map" target="_blank" rel="noopener" aria-label="Открыть в 2ГИС">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Открыть в 2ГИС
       </a>
@@ -1367,90 +929,70 @@
 
 </main>
 
-<!-- ═══ FOOTER ═══════════════════════════════════════════════════════ -->
+<!-- ═══ FOOTER ════════════════════════════════════════════════════ -->
 <footer>
   <small>© 2024 DA Nail Studio Beauty Bar &nbsp;·&nbsp; ул. Керуентау 2/1, Мамыр, Алматы</small>
 </footer>
 
-<!-- ═══ FAB WhatsApp ══════════════════════════════════════════════════ -->
-<a
-  href="https://wa.me/НОМЕР_ТЕЛЕФОНА"
-  class="fab"
-  target="_blank"
-  rel="noopener"
-  aria-label="Написать в WhatsApp"
->
+<!-- ═══ FAB ═══════════════════════════════════════════════════════ -->
+<a href="https://wa.me/НОМЕР_ТЕЛЕФОНА" class="fab" target="_blank" rel="noopener" aria-label="Написать в WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
 </a>
 
-<!-- ═══ JS ════════════════════════════════════════════════════════════ -->
+<!-- ═══ JS ═════════════════════════════════════════════════════════ -->
 <script>
-  'use strict';
+'use strict';
 
-  // ── Nav: scroll shadow ──────────────────────────────────────────────
-  const nav = document.getElementById('nav');
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 24);
-  window.addEventListener('scroll', onScroll, { passive: true });
+/* ── Nav scroll ─────────────────────────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('on', scrollY > 20), { passive: true });
 
-  // ── Nav: mobile burger ──────────────────────────────────────────────
-  const burger     = document.getElementById('burger');
-  const mobileMenu = document.getElementById('nav-mobile');
-  const mobileLinks = mobileMenu.querySelectorAll('.nav-mobile-link, .btn');
+/* ── Burger ─────────────────────────────────────────────────────── */
+const burger = document.getElementById('burger');
+const mob    = document.getElementById('mob');
+burger.addEventListener('click', () => {
+  const open = mob.classList.toggle('open');
+  burger.setAttribute('aria-expanded', String(open));
+  burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+});
+mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+  mob.classList.remove('open');
+  burger.setAttribute('aria-expanded', 'false');
+  burger.setAttribute('aria-label', 'Открыть меню');
+}));
 
-  burger.addEventListener('click', () => {
-    const open = mobileMenu.classList.toggle('open');
-    burger.setAttribute('aria-expanded', String(open));
-    burger.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+/* ── Tabs ───────────────────────────────────────────────────────── */
+const tabBtns   = document.querySelectorAll('.tab-btn');
+const tabPanels = {
+  mani: document.getElementById('tp-mani'),
+  hair: document.getElementById('tp-hair')
+};
+tabBtns.forEach(btn => btn.addEventListener('click', () => {
+  tabBtns.forEach(b => { b.classList.remove('on'); b.setAttribute('aria-selected','false'); });
+  btn.classList.add('on'); btn.setAttribute('aria-selected','true');
+  Object.values(tabPanels).forEach(p => p.classList.remove('on'));
+  tabPanels[btn.dataset.tab].classList.add('on');
+  // re-observe newly visible cards
+  document.querySelectorAll('.reveal-up:not(.visible)').forEach(el => observer.observe(el));
+}));
+
+/* ── IntersectionObserver scroll reveal ────────────────────────── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      // stagger siblings in the same grid
+      const siblings = entry.target.parentElement
+        ? [...entry.target.parentElement.children].filter(c => c.classList.contains(entry.target.classList[0]))
+        : [];
+      const idx = siblings.indexOf(entry.target);
+      const delay = entry.target.classList.contains('reveal-up') ? idx * 45 : 0;
+      setTimeout(() => entry.target.classList.add('visible'), delay);
+      observer.unobserve(entry.target);
+    }
   });
-  mobileLinks.forEach(l => l.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    burger.setAttribute('aria-expanded', 'false');
-    burger.setAttribute('aria-label', 'Открыть меню');
-  }));
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
 
-  // ── Tabs (ARIA-compliant) ───────────────────────────────────────────
-  const tabBtns   = document.querySelectorAll('.tab-btn');
-  const tabPanels = { mani: document.getElementById('tab-mani'), hair: document.getElementById('tab-hair') };
-
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      tabBtns.forEach(b => {
-        b.classList.remove('active');
-        b.setAttribute('aria-selected', 'false');
-      });
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-
-      Object.values(tabPanels).forEach(p => p.classList.remove('active'));
-      tabPanels[btn.dataset.tab].classList.add('active');
-
-      // Re-trigger staggered reveal for newly visible cards
-      triggerReveal();
-    });
-  });
-
-  // ── Scroll reveal (stagger 40ms per card, per skill guideline) ──────
-  const revealEls = () => document.querySelectorAll('.reveal:not(.in), .reveal-fast:not(.in)');
-
-  function triggerReveal() {
-    let delay = 0;
-    revealEls().forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight - 48) {
-        const d = delay;
-        setTimeout(() => el.classList.add('in'), d);
-        delay += el.classList.contains('reveal-fast') ? 40 : 0;
-      }
-    });
-  }
-
-  window.addEventListener('scroll', triggerReveal, { passive: true });
-  // Initial trigger after fonts load
-  if (document.fonts) {
-    document.fonts.ready.then(triggerReveal);
-  } else {
-    triggerReveal();
-  }
+document.querySelectorAll('.reveal, .reveal-up').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
